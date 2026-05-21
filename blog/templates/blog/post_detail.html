@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<a href="{% url 'post-list' %}" style="color:#44b78b; text-decoration:none;">← უკან</a>
+<div style="background:white; border-radius:10px; padding:2rem; margin:1.2rem 0; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color:#0c4b33; margin-bottom:0.5rem;">{{ post.title }}</h2>
+  <p style="color:#6b7280; font-size:0.85rem; margin-bottom:1.2rem;">✍️ {{ post.author }} &nbsp;|&nbsp; 🕒 {{ post.created_at|date:"d M Y, H:i" }}</p>
+  <p style="line-height:1.8; color:#374151;">{{ post.content }}</p>
+</div>
+
+<h3 style="color:#0c4b33; margin-bottom:1rem;">💬 კომენტარები ({{ comments.count }})</h3>
+{% for comment in comments %}
+<div style="background:#f0faf5; border-radius:8px; padding:1rem; margin-bottom:0.6rem; border-left:3px solid #44b78b;">
+  <strong>{{ comment.author }}</strong>
+  <span style="color:#6b7280; font-size:0.8rem; margin-left:0.5rem;">{{ comment.created_at|date:"d M Y" }}</span>
+  <p style="margin-top:0.4rem;">{{ comment.text }}</p>
+</div>
+{% empty %}
+<p style="color:#6b7280;">კომენტარები არ არის.</p>
+{% endfor %}
+{% endblock %}
